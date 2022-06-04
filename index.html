@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+	background-image: url("concrete-road.jpg");
+    background-position: center;
+    background-size: cover;
+}
+#myCanvas
+{
+    margin-top: 30px;
+	border-width:10px;
+	background-color: white; 
+	border-style:ridge;
+}
+
+h1,h3,h4
+{
+	color: rgb(255, 241, 43) !important;
+}
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<title>Valet Parking </title>
+</head>
+<body onload="add();">
+
+<center>
+<h1>Valet Parking</h1>
+<h3>Move the green car with arrow keys</h3>
+<h4>
+	<b class="text-danger">NOTE : </b> IF CAR IS NOT VISIBLE PRESS ANY ARROW KEY
+</h4>
+
+	<canvas id="Cava" height="600" width="800"></canvas>
+
+
+</center>
+
+</body>
+<script>var canvas = document.getElementById("Cava");
+	var ctx = canvas.getContext("2d");
+	
+	
+	var heightCar = 100;
+	var widthCar = 75;
+	
+	background_image = "parkingLot.jpg";
+	greencar_image = "car2.png";
+	
+	carX = 5;
+	carY = 225;
+	
+	function add() {
+		background_img = new Image();
+		background_img.onload = uploadBackground;
+		background_img.src = background_image;
+		car_img = new Image();
+		car_img.onload = uploadgreencar;
+		car_img.src = greencar_image;
+	}
+	
+	function uploadBackground() {
+		ctx.drawImage(background_img,0,0,canvas.width,canvas.height);
+	
+	}
+	
+	function uploadgreencar() {
+		ctx.drawImage(car_img,carX,carY,widthCar,heightCar);
+	
+		
+	}
+	
+	
+	window.addEventListener("keydown", my_keydown);
+	
+	function my_keydown(e)
+	{
+		keyPressed = e.keyCode;
+		console.log(keyPressed);
+			if(keyPressed == 38)
+			{
+				up();
+				console.log("up");
+			}
+		
+			if(keyPressed == "40")
+			{
+				down();
+				console.log("down");
+			}
+			
+			if(keyPressed == "37")
+			{
+				left();
+				console.log("left");
+			}
+		
+			if(keyPressed == 39)
+			{
+				right();
+				console.log("right");
+			}
+			
+			
+	}
+	
+	function up()
+	{
+		if (carY >= 0){
+			carY =carY -10;
+			console.log("when up arrow click X = "  + carX +" Y = " + carY);
+			uploadBackground();
+			uploadgreencar();
+	
+		}
+	}
+	
+	function down()
+	{
+		if (carY <= 500){
+			carY =carY +10;
+			console.log("when down arrow click X = "  + carX +" Y = " + carY);
+			uploadBackground();
+			uploadgreencar();
+		}
+	}
+	
+	function left()
+	{
+		if (carX > 0){
+			carX =carX -10;
+			console.log("when left arrow click X = "  + carX +" Y = " + carY);
+			uploadBackground();
+			uploadgreencar();
+		}
+	}
+	
+	function right()
+	{
+		if (carX < 700){
+			carX =carX +10;
+			console.log("when right arrow click X = "  + carX +" Y = " + carY);
+			uploadBackground();
+			uploadgreencar();
+		}
+	}
+	</script>
+</html>
